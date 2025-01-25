@@ -42,6 +42,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -121,11 +122,14 @@ fun Carousel(modifier: Modifier = Modifier, imageId: Int, name: String, ratings:
                 horizontalArrangement = Arrangement.SpaceAround
             ){
                 Text(
-                    text = "Rating ✪"
+                    text = "Rating ✪",
+                    color = colorResource(id = R.color.yellow_green),
+                    modifier = Modifier
                 )
 
                 Text(
                     modifier = Modifier,
+                    color = colorResource(id = R.color.yellow_green),
                     text = ratings
                 )
             }
@@ -139,7 +143,7 @@ fun Carousel(modifier: Modifier = Modifier, imageId: Int, name: String, ratings:
                     style = TextStyle(
                         fontSize = 20.sp
                     ),
-                    text = "Description"
+                    text = "Description",
                 )
 
                 HorizontalDivider(
@@ -207,24 +211,17 @@ fun ScrollButtons(modifier: Modifier = Modifier){
 fun ArtGalleryApp(modifier: Modifier = Modifier) {
     Box(modifier = Modifier.fillMaxSize()) {
         // Scrollable content
+
+
         Column(
             modifier = Modifier
                 .verticalScroll(rememberScrollState())
                 .fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
-            Text(
-                text = stringResource(id = R.string.title),
-                modifier = Modifier.fillMaxWidth(),
-                textAlign = TextAlign.Center,
-                style = TextStyle(
-                    fontSize = 40.sp,
-                    fontFamily = FontFamily.Cursive,
-                    fontWeight = FontWeight.Bold
-                )
-            )
 
-            Spacer(modifier = Modifier.height(28.dp))
+
+            Spacer(modifier = Modifier.height(64.dp))
 
             Row(
                 modifier = Modifier
@@ -253,6 +250,21 @@ fun ArtGalleryApp(modifier: Modifier = Modifier) {
             }
 
             Spacer(modifier = Modifier.height(32.dp))
+        }
+        Box(modifier = Modifier
+            .background(MaterialTheme.colorScheme.background)
+        ){
+            Text(
+                text = stringResource(id = R.string.title),
+                modifier = Modifier.fillMaxWidth(),
+                textAlign = TextAlign.Center,
+                color = colorResource(id  = R.color.goodblue),
+                style = TextStyle(
+                    fontSize = 40.sp,
+                    fontFamily = FontFamily.Cursive,
+                    fontWeight = FontWeight.Bold
+                )
+            )
         }
 
         // Fixed buttons at the bottom
