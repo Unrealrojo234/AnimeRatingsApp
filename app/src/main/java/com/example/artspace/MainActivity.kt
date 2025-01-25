@@ -5,6 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -24,6 +25,7 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -88,7 +90,7 @@ fun Carousel(modifier: Modifier = Modifier, imageId: Int, name: String, ratings:
             .width(300.dp),
         colors = CardDefaults.cardColors(containerColor = Color.Transparent)
     ) {
-        
+
         Column(modifier = Modifier.fillMaxWidth()) {
 
             Image(
@@ -194,83 +196,73 @@ fun ScrollButtons(modifier: Modifier = Modifier){
     Row(
         modifier = Modifier
             .fillMaxWidth(),
-        horizontalArrangement = Arrangement.SpaceEvenly
+        horizontalArrangement = Arrangement.SpaceBetween
     ) {
         ActionButton(text = "Previous")
         ActionButton(text = "Next")
     }
 }
 
-
 @Composable
-fun ArtGalleryApp(modifier: Modifier = Modifier){
-    Column(
-        modifier = Modifier
-            .verticalScroll(rememberScrollState())
-            .fillMaxSize(),
-        horizontalAlignment = Alignment.CenterHorizontally,
-    ) {
-
-
-
-        Text(
-            text = stringResource(id = R.string.title),
-            modifier = modifier
-                .fillMaxWidth(),
-            textAlign = TextAlign.Center,
-            style = TextStyle(
-                fontSize = 40.sp,
-                fontFamily = FontFamily.Cursive,
-                fontWeight = FontWeight.Bold
+fun ArtGalleryApp(modifier: Modifier = Modifier) {
+    Box(modifier = Modifier.fillMaxSize()) {
+        // Scrollable content
+        Column(
+            modifier = Modifier
+                .verticalScroll(rememberScrollState())
+                .fillMaxSize(),
+            horizontalAlignment = Alignment.CenterHorizontally,
+        ) {
+            Text(
+                text = stringResource(id = R.string.title),
+                modifier = Modifier.fillMaxWidth(),
+                textAlign = TextAlign.Center,
+                style = TextStyle(
+                    fontSize = 40.sp,
+                    fontFamily = FontFamily.Cursive,
+                    fontWeight = FontWeight.Bold
+                )
             )
 
-        )
+            Spacer(modifier = Modifier.height(28.dp))
 
-        Spacer(modifier = Modifier.height(28.dp))
-
-        Box(modifier = Modifier.fillMaxWidth()){
-            Row (
+            Row(
                 modifier = Modifier
                     .horizontalScroll(rememberScrollState())
                     .fillMaxWidth(),
                 horizontalArrangement = Arrangement.spacedBy(36.dp),
-            ){
+            ) {
                 Spacer(modifier = Modifier)
 
-
-                for(i in animes){
+                for (i in animes) {
                     val currentIndex = animes.indexOf(i)
                     val imageId = animes[currentIndex][0] as Int
                     val name = animes[currentIndex][1] as String
                     val ratings = animes[currentIndex][2] as String
                     val descriptionId = animes[currentIndex][3] as Int
 
-
-                    Carousel(imageId = imageId, name = name, ratings = ratings, descriptionId = descriptionId)
-
+                    Carousel(
+                        imageId = imageId,
+                        name = name,
+                        ratings = ratings,
+                        descriptionId = descriptionId
+                    )
                 }
 
-                Spacer(modifier = Modifier)
-
-
-
-
+                Spacer(modifier = Modifier.padding(bottom = 100.dp))
             }
 
             Spacer(modifier = Modifier.height(32.dp))
-
-            ScrollButtons(modifier = Modifier.align(Alignment.BottomCenter))
-
         }
 
-
-
+        // Fixed buttons at the bottom
+        Box(
+            modifier = Modifier
+                .background(MaterialTheme.colorScheme.background) // Semi-transparent background
+                .align(Alignment.BottomCenter) // Align to the bottom center
+                .padding(8.dp) // Add some padding
+        ) {
+            ScrollButtons()
+        }
     }
-
-}
-
-@Preview (showBackground = true)
-@Composable
-fun ArtGalleryPreview(modifier: Modifier = Modifier){
-    ArtGalleryApp(modifier = Modifier)
 }
