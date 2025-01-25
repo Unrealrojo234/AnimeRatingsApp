@@ -2,7 +2,7 @@
 
 A Jetpack Compose Android app showcasing a curated collection of anime series in an interactive carousel format. Users can navigate through different anime titles, view ratings, and read descriptions.
 
-<img src="https://github.com/user-attachments/assets/5db54de6-62d4-4bec-8681-5a4991cbd981" width="300"/>
+<img src="https://github.com/user-attachments/assets/1627ae43-36f0-4abf-ba40-c56d66b25f94" width="300"/>
 
 
 ## Features
